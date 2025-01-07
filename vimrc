@@ -10,5 +10,4 @@ Require keybindings
 Require run_buffer
 Require search
 Require help
-Require type
 Require autocmd
