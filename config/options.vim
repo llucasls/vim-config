@@ -14,7 +14,7 @@ set hidden
 set expandtab
 set autoindent
 set softtabstop=4
-set shiftwidth=2
+#set shiftwidth=2
 set tabstop=4
 set hlsearch
 &scrolloff = float2nr(round(winheight(0) / 3.0))
