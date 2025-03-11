@@ -23,5 +23,5 @@ augroup END
 
 augroup terminal
   autocmd VimEnter * normal! i
-  autocmd VimLeave * :!printf '\033[4 q'
+  autocmd VimLeave * :!printf '\033[2 q'
 augroup END
