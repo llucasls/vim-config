@@ -1,13 +1,21 @@
 vim9script
-var vimdir = $MYVIMDIR->trim('/', 2)
-command -nargs=1 Source execute printf('source %s/%s', vimdir, <q-args>)
-command -nargs=1 Require execute printf('source %s/config/%s.vim', vimdir, <q-args>)
+if v:progname ==# 'vim'  # not vi
+  if $TERM ==? 'linux' || $TERM =~? '^vt'
+    $session_type = 'tty'
+  else
+    $session_type = 'gui'
+  endif
 
-Require plugins
-Require options
-Require term
-Require keybindings
-Require run_buffer
-Require search
-Require help
-Require autocmd
+  var vimdir = $MYVIMDIR->trim('/', 2)
+  command -nargs=1 Source execute printf('source %s/%s', vimdir, <q-args>)
+  command -nargs=1 Require execute printf('source %s/config/%s.vim', vimdir, <q-args>)
+
+  Require plugins
+  Require options
+  Require term
+  Require keybindings
+  Require run_buffer
+  Require search
+  Require help
+  Require autocmd
+endif

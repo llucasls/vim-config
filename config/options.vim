@@ -19,7 +19,6 @@ set tabstop=4
 set hlsearch
 &scrolloff = float2nr(round(winheight(0) / 3.0))
 
-set clipboard=unnamedplus
 set colorcolumn=80
 
 # Enable mouse click for vim
@@ -33,3 +32,7 @@ set whichwrap+=<,>,[,]
 
 # Place swap file in one of these directories
 set directory=$MYVIMDIR/tmp//,.,/var/tmp//,/tmp//
+
+if $session_type ==# 'gui'
+  set clipboard=unnamedplus
+endif

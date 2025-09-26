@@ -5,6 +5,10 @@ vim9script
 const pattern = '00: Caps Lock:\s\+\zs\(on\|off\)\ze'
 
 def TurnOffCaps()
+  if $session_type ==# 'tty' || !executable('xset') || !executable('xdotool')
+    return
+  endif
+
   var caps_state = matchstr(system('xset -q'), pattern)
   if caps_state == 'on'
     silent! execute ':!xdotool key Caps_Lock'
@@ -21,7 +25,9 @@ augroup auto_commands
   autocmd VimResized * call SetScrolloff()
 augroup END
 
-augroup terminal
-  autocmd VimEnter * normal! i
-  autocmd VimLeave * :!printf '\033[2 q'
-augroup END
+if $session_type ==# 'gui'
+  augroup terminal
+    autocmd VimEnter * normal! i
+    autocmd VimLeave * :!printf '\033[2 q'
+  augroup END
+endif
