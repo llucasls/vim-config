@@ -3,7 +3,7 @@ vim9script
 filetype on
 
 syntax enable
-colorscheme gruvbox
+colorscheme onedark
 set background=dark
 set termguicolors
 

@@ -10,12 +10,13 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 #Plug 'arcticicestudio/nord-vim'
 Plug 'garbas/vim-snipmate'
-Plug 'morhetz/gruvbox'
+#Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
 #Plug 'flazz/vim-colorschemes'
+Plug 'https://github.com/EvitanRelta/vim-colorschemes'
 plug#end()
 
 g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
