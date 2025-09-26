@@ -63,7 +63,6 @@ def SaveOpenFiles(files: list<string>): void
 enddef
 
 def RunBuffer(): void
-  var run_cmd: string
   var cmd = GetInterpreter()
   if cmd == ''
     return
@@ -75,6 +74,9 @@ def RunBuffer(): void
     execute 'source' file
   else
     echo trim(system(cmd .. ' ' .. file))
+    if v:shell_error != 0
+      echo 'shell returned ' .. v:shell_error
+    endif
   endif
 enddef
 
@@ -85,6 +87,7 @@ def RunBufferWithArgs(): void
     return
   endif
 
+  silent! w
   var prompt = printf('$ %s ', cmd)
   var user_input = input(prompt, '', 'file')
 
@@ -109,6 +112,9 @@ def RunBufferWithArgs(): void
       var arg_list = argv->join()
       var command = printf('%s %s', cmd, arg_list)
       echo trim(system(command))
+      if v:shell_error != 0
+        echo 'shell returned ' .. v:shell_error
+      endif
     endif
   endif
 enddef
