@@ -32,3 +32,5 @@ g:airline#extensions#tabline#enabled = 1
 g:airline#extensions#tabline#left_sep = ' '
 g:airline#extensions#tabline#left_alt_sep = '|'
 g:airline#extensions#tabline#formatter = 'unique_tail'
+
+colorscheme onedark

@@ -3,7 +3,6 @@ vim9script
 filetype on
 
 syntax enable
-colorscheme onedark
 set background=dark
 set termguicolors
 
