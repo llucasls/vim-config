@@ -27,6 +27,7 @@ augroup END
 
 if $session_type ==# 'gui'
   augroup terminal
+    autocmd!
     autocmd VimEnter * normal! i
     autocmd VimLeave * :!printf '\033[2 q'
   augroup END
