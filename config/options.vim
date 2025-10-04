@@ -25,7 +25,8 @@ set colorcolumn=80
 set mouse=a
 
 # See invisible characters
-set list listchars=tab:»\ ,trail:+,eol:$
+set list listchars=tab:»\ ,trail:+,eol:$,conceal:…
+set conceallevel=1 concealcursor=
 
 # Wrap to next line when end of line is reached
 set whichwrap+=<,>,[,]
