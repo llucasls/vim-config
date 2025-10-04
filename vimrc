@@ -16,6 +16,7 @@ if v:progname ==# 'vim'  # not vi
   Require search
   Require help
   Require autocmd
+  Require conceal
   Require options
   Require plugins
 
