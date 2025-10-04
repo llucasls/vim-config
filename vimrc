@@ -18,4 +18,8 @@ if v:progname ==# 'vim'  # not vi
   Require autocmd
   Require options
   Require plugins
+
+  if filereadable($'{vimdir}/local.vim')
+    Source local.vim
+  endif
 endif
