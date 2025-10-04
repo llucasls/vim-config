@@ -6,6 +6,7 @@ nnoremap <F3> :set relativenumber! <cr>
 nnoremap <F4> :nohlsearch<cr>
 # Select all the current file's content
 nnoremap <leader>y :%yank+<cr>
+nnoremap Y y$
 
 nnoremap <leader>s :%substitute//g<left><left>
 
