@@ -18,6 +18,13 @@ set tabstop=4
 set hlsearch
 &scrolloff = float2nr(round(winheight(0) / 3.0))
 
+set clipboard=unnamedplus
+if !has('clipboard')
+  echohl WarningMsg
+  echomsg 'Warning: Vim was built without clipboard support (+clipboard).'
+  echohl None
+endif
+
 set colorcolumn=80
 
 # Enable mouse click for vim

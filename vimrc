@@ -6,6 +6,10 @@ if v:progname ==# 'vim'  # not vi
     $session_type = 'gui'
   endif
 
+  if !$MYVIMDIR
+    $MYVIMDIR = '/home/lucas/.vim'
+  endif
+
   var vimdir = $MYVIMDIR->trim('/', 2)
   command -nargs=1 Source execute printf('source %s/%s', vimdir, <q-args>)
   command -nargs=1 Require execute printf('source %s/config/%s.vim', vimdir, <q-args>)
