@@ -1,5 +1,5 @@
 vim9script
-set t_me=[22;25;27;39m
+set t_me=[0m
 set t_mr=[7m
 set t_mb=[5m
 set t_md=[1m

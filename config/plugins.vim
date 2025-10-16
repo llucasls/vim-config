@@ -33,4 +33,8 @@ g:airline#extensions#tabline#left_sep = ' '
 g:airline#extensions#tabline#left_alt_sep = '|'
 g:airline#extensions#tabline#formatter = 'unique_tail'
 
-colorscheme onedark
+if $session_type ==# 'gui'
+  colorscheme onedark
+elseif $session_type ==# 'tty'
+  colorscheme atom
+endif
