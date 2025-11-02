@@ -7,7 +7,8 @@ if v:progname ==# 'vim'  # not vi
   endif
 
   if !$MYVIMDIR
-    $MYVIMDIR = '/home/lucas/.vim'
+    var path_list = $MYVIMRC->split('/')
+    $MYVIMDIR = path_list->slice(0, path_list->len() - 1)->join('/')
   endif
 
   var vimdir = $MYVIMDIR->trim('/', 2)
