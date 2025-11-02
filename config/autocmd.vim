@@ -15,14 +15,23 @@ def TurnOffCaps()
   endif
 enddef
 
-def SetScrolloff()
-  &scrolloff = float2nr(round(winheight(0) / 3.0))
+def SetScrolloff(scope: string = ''): void
+  if scope ==# 'local'
+    &l:scrolloff = float2nr(round(winheight(0) / 3.0))
+  elseif scope ==# 'global'
+    &g:scrolloff = float2nr(round(winheight(0) / 3.0))
+  else
+    &scrolloff = float2nr(round(winheight(0) / 3.0))
+  endif
 enddef
 
 augroup auto_commands
   autocmd!
-  autocmd InsertLeave * call TurnOffCaps()
-  autocmd VimResized * call SetScrolloff()
+  autocmd InsertLeave * TurnOffCaps()
+  autocmd VimResized * SetScrolloff('local')
+  autocmd WinResized * SetScrolloff('local')
+  autocmd WinNew * SetScrolloff('local')
+  autocmd WinEnter * SetScrolloff('local')
 augroup END
 
 if $session_type ==# 'gui'
