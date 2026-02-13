@@ -1,8 +1,9 @@
 vim9script
 if v:progname ==# 'vim'  # not vi
-  if $TERM ==? 'linux' || $TERM =~? '^vt'
+  const session_defined: bool = environ()->has_key('session_type')
+  if !session_defined && ($TERM ==? 'linux' || $TERM =~? '^vt')
     $session_type = 'tty'
-  else
+  elseif !session_defined
     $session_type = 'gui'
   endif
 
