@@ -9,6 +9,7 @@ nnoremap <leader>y :%yank+<cr>
 nnoremap Y y$
 
 nnoremap <leader>s :%substitute//g<left><left>
+nnoremap <leader>; :vim9<space>
 
 # Shift + Tab writes hard tab
 inoremap <S-Tab> <C-V><Tab>
