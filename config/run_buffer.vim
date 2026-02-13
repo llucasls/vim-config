@@ -8,7 +8,7 @@ const interpreter_dict = {
   'php': 'php',
   'java': 'java',
   'coffee': 'coffee',
-  'typescript': 'ts-node',
+  'typescript': 'deno run --allow-all',
   'sql': 'mysql --table <',
   'mongodb': 'mongosh --quiet <',
   'sh': 'sh',
