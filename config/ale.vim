@@ -15,3 +15,5 @@ augroup AleDetailTweaks
     autocmd!
     autocmd FileType ale-preview setlocal listchars-=trail:+
 augroup END
+
+nnoremap <leader>d <Plug>(ale_detail)
