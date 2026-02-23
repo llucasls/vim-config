@@ -26,11 +26,12 @@ nnoremap <End> :hide blast! <cr>
 nnoremap <Del> :bdelete! <cr>
 #nnoremap <Insert> :hide enew <cr>
 
-#Remap the j, k, 0 and $ keys to gj, gk, g0 and g$ in normal mode
-nmap j gj
-nmap k gk
-nmap 0 g0
-nmap $ g$
+# Remap the j, k, 0 and $ keys to gj, gk, g0 and g$ in normal mode
+# The motions don't change when preceded by a count
+nnoremap <expr> j v:count != 0 ? 'j' : 'gj'
+nnoremap <expr> k v:count != 0 ? 'k' : 'gk'
+nnoremap <expr> 0 v:count != 0 ? '0' : 'g0'
+nnoremap <expr> $ v:count != 0 ? '$' : 'g$'
 
 inoremap ( ()<left>
 inoremap [ []<left>
