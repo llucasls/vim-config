@@ -18,7 +18,7 @@ class OxLintData
 
     def new(data: dict<any>)
         const labels: list<dict<any>> = data->get('labels', [])
-        const label: dict<any> = labels->get(0)
+        const label: dict<any> = labels->get(0, {})
         const span: dict<any> = label->get('span', {})
 
         this.col = span->get('column')
@@ -288,7 +288,7 @@ export def RunOxlint(buffer: number, lines: list<string>): list<dict<any>>
 
     for item in decoded['diagnostics']
         labels = item->get('labels', [])
-        label = labels->get(0)
+        label = labels->get(0, {})
         if !label
             continue
         endif
