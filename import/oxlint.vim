@@ -73,11 +73,11 @@ class OxLintData
 
         const no_empty_file = 'eslint-plugin-unicorn(no-empty-file)'
 
-        if this.code ==# no_empty_file && $session_type ==# 'gui'
+        if this.code ==# no_empty_file && $session_type ==# 'gui-default'
             return this._DetailEmptyGUI()
         elseif this.code ==# no_empty_file
             return this._DetailEmptyTTY()
-        elseif $session_type ==# 'gui'
+        elseif $session_type ==# 'gui-default'
             return this._DetailGUI(name, num_size, used_lines)
         else
             return this._DetailTTY(name, num_size, used_lines)

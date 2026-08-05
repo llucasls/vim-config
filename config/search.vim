@@ -1,5 +1,5 @@
 vim9script
-def VSetSearch()
+def VisualSetSearch()
   var temp = getreg('"')
   normal! gvy
   var pattern = '\V' .. substitute(escape(getreg('"'), '\'), '\n', '\\n', 'g')
@@ -7,8 +7,6 @@ def VSetSearch()
   setreg('@', temp)
 enddef
 
-command! VSetSearch call VSetSearch()
-
-vnoremap / :<C-u>VSetSearch<cr>//<cr>
-vnoremap ? :<C-u>VSetSearch<cr>??<cr>
-vnoremap <leader>/ :<C-u>VSetSearch<cr>:%s/<C-r>///g<left><left>
+vnoremap / :<C-u><ScriptCmd>VisualSetSearch()<cr>//<cr>
+vnoremap ? :<C-u><ScriptCmd>VisualSetSearch()<cr>??<cr>
+vnoremap <leader>/ :<C-u><ScriptCmd>VisualSetSearch()<cr>:%s/<C-r>///g<left><left>

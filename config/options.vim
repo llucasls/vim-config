@@ -2,7 +2,9 @@ vim9script
 # Enable file type detection
 filetype on
 
-syntax enable
+runtime! ftplugin/man.vim
+
+#syntax enable
 set background=dark
 set termguicolors
 
@@ -33,10 +35,14 @@ set whichwrap+=<,>,[,]
 # Place swap file in one of these directories
 set directory=$MYVIMDIR/tmp//,.,/var/tmp//,/tmp//
 
-if $session_type ==# 'gui' && has('clipboard')
+if $session_type =~# 'gui' && has('clipboard')
   set clipboard=unnamedplus
-elseif $session_type ==# 'gui' && !has('clipboard')
+elseif $session_type =~# 'gui' && !has('clipboard')
   echohl WarningMsg
   echomsg 'Warning: Vim was built without clipboard support (+clipboard).'
   echohl None
 endif
+
+# Try to fix ghost characters on screen
+# If it fails, increase to 200
+set ttimeoutlen=50

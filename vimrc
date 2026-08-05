@@ -1,10 +1,16 @@
 vim9script
 if v:progname ==# 'vim'  # not vi
   const session_defined: bool = environ()->has_key('session_type')
-  if !session_defined && ($TERM ==? 'linux' || $TERM =~? '^vt')
+  if session_defined
+    # no op
+  elseif environ()->has_key('SSH_CONNECTION')
+    $session_type = 'ssh'
+  elseif &term ==? 'linux' || &term =~? '^vt'
     $session_type = 'tty'
-  elseif !session_defined
-    $session_type = 'gui'
+  elseif &term =~# 'xterm'
+    $session_type = 'gui-xterm'
+  else
+    $session_type = 'gui-default'
   endif
 
   if !$MYVIMDIR
@@ -25,6 +31,7 @@ if v:progname ==# 'vim'  # not vi
   Require plugins
   Require options
   Require ale
+  Require xen
 
   if filereadable($'{vimdir}/local.vim')
     Source local.vim

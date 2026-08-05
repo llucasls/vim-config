@@ -120,7 +120,5 @@ def RunBufferWithArgs(): void
 enddef
 
 # Map a key to run the current buffer
-command! RunBuffer call RunBuffer()
-command! RunBufferWithArgs call RunBufferWithArgs()
-nnoremap <leader><leader> :RunBuffer<cr>
-nnoremap <leader><space> :RunBufferWithArgs<cr>
+nnoremap <leader><leader> <ScriptCmd>RunBuffer()<cr>
+nnoremap <leader><space> <ScriptCmd>RunBufferWithArgs()<cr>

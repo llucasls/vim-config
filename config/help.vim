@@ -19,5 +19,4 @@ def HelpCurwin(subject: string): void
   bdelete help.txt
   set buflisted
   set bufhidden=delete
-  #return 'help ' .. subject
 enddef
