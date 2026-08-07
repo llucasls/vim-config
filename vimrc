@@ -7,10 +7,8 @@ if v:progname ==# 'vim'  # not vi
     $session_type = 'ssh'
   elseif &term ==? 'linux' || &term =~? '^vt'
     $session_type = 'tty'
-  elseif &term =~# 'xterm'
-    $session_type = 'gui-xterm'
   else
-    $session_type = 'gui-default'
+    $session_type = 'gui'
   endif
 
   if !$MYVIMDIR

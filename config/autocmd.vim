@@ -1,7 +1,7 @@
 vim9script
 const pattern = '00: Caps Lock:\s\+\zs\(on\|off\)\ze'
 
-if $session_type =~# 'gui' && executable('xset') && executable('xdotool')
+if $session_type ==# 'gui' && executable('xset') && executable('xdotool')
   def TurnOffCaps(): void
     const caps_state: string = matchstr(system(['xset', '-q']), pattern)
     if caps_state ==? 'on'
@@ -43,7 +43,7 @@ augroup auto_commands
   autocmd FileType diff,git,fugitive setlocal listchars-=trail:+
 augroup END
 
-if $session_type =~# 'gui'
+if $session_type ==# 'gui'
   augroup terminal
     autocmd!
     autocmd VimEnter * normal! i

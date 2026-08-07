@@ -35,9 +35,9 @@ set whichwrap+=<,>,[,]
 # Place swap file in one of these directories
 set directory=$MYVIMDIR/tmp//,.,/var/tmp//,/tmp//
 
-if $session_type =~# 'gui' && has('clipboard')
+if $session_type ==# 'gui' && has('clipboard')
   set clipboard=unnamedplus
-elseif $session_type =~# 'gui' && !has('clipboard')
+elseif $session_type ==# 'gui' && !has('clipboard')
   echohl WarningMsg
   echomsg 'Warning: Vim was built without clipboard support (+clipboard).'
   echohl None

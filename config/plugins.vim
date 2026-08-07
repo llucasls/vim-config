@@ -33,15 +33,16 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'https://github.com/EvitanRelta/vim-colorschemes'
 
-if $session_type ==# 'gui-default'
+if $session_type ==# 'gui' && &term !~# 'xterm'
   Plug 'ryanoasis/vim-devicons'
 endif
 
 plug#end()
 
 # set colorscheme after plugin is loaded
-if $session_type =~# 'gui'
-  colorscheme onedark
-elseif $session_type ==# 'tty'
+# read &term directly so it works on ssh
+if &term ==? 'linux' || &term =~? '^vt'
   colorscheme atom
+else
+  colorscheme onedark
 endif

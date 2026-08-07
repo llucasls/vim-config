@@ -46,7 +46,7 @@ inoremap <C-Tab> <C-d>
 command -nargs=0 -range PreviousBuffer execute 'hide bprevious!' v:count1
 command -nargs=0 -range NextBuffer execute 'hide bnext!' v:count1
 
-if $session_type =~# 'xterm'
+if &term =~# 'xterm'
   nnoremap <silent> <M-k> :PreviousBuffer <cr>
   nnoremap <silent> <M-j> :NextBuffer <cr>
   nnoremap <silent> <M-h> :hide bfirst! <cr>
