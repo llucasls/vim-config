@@ -28,6 +28,70 @@ def GoToPattern(pattern: string, count: number, backward = false): void
   endif
 enddef
 
+def WriteSingleQuotes(): void
+  const current_position = getpos('.')
+  const [bufnum, lnum, col, off] = current_position
+  const text = getline(lnum)
+
+  if text[col - 1] != "'" && col > 2 && text->strpart(col - 3, 2) == "''"
+    setline(lnum, $"{text->strpart(0, col - 2)}''''{text->strpart(col - 2)}")
+  elseif text[col - 1] != "'"
+    setline(lnum, $"{text->strpart(0, col - 1)}''{text->strpart(col - 1)}")
+  endif
+
+  setpos('.', [bufnum, lnum, col + 1, off])
+enddef
+
+def WriteDoubleQuotes(): void
+  const current_position = getpos('.')
+  const [bufnum, lnum, col, off] = current_position
+  const text = getline(lnum)
+
+  if text[col - 1] != '"' && col > 2 && text->strpart(col - 3, 2) == '""'
+    setline(lnum, $'{text->strpart(0, col - 2)}""""{text->strpart(col - 2)}')
+  elseif text[col - 1] != '"'
+    setline(lnum, $'{text->strpart(0, col - 1)}""{text->strpart(col - 1)}')
+  endif
+
+  setpos('.', [bufnum, lnum, col + 1, off])
+enddef
+
+def WriteClosingParenthesis(): void
+  const current_position = getpos('.')
+  const [bufnum, lnum, col, off] = current_position
+  const text = getline(lnum)
+
+  if text[col - 1] != ')'
+    setline(lnum, $'{text->strpart(0, col - 1)}){text->strpart(col - 1)}')
+  endif
+
+  setpos('.', [bufnum, lnum, col + 1, off])
+enddef
+
+def WriteClosingBrackets(): void
+  const current_position = getpos('.')
+  const [bufnum, lnum, col, off] = current_position
+  const text = getline(lnum)
+
+  if text[col - 1] != ']'
+    setline(lnum, $'{text->strpart(0, col - 1)}]{text->strpart(col - 1)}')
+  endif
+
+  setpos('.', [bufnum, lnum, col + 1, off])
+enddef
+
+def WriteClosingBraces(): void
+  const current_position = getpos('.')
+  const [bufnum, lnum, col, off] = current_position
+  const text = getline(lnum)
+
+  if text[col - 1] != '}'
+    setline(lnum, $'{text->strpart(0, col - 1)}}}{text->strpart(col - 1)}')
+  endif
+
+  setpos('.', [bufnum, lnum, col + 1, off])
+enddef
+
 nnoremap <F2> :NERDTreeToggle <cr>
 nnoremap <F3> :set relativenumber! <cr>
 nnoremap <F4> :nohlsearch<cr>
@@ -86,7 +150,10 @@ nnoremap 0 <ScriptCmd>GoToStart()<cr>
 nnoremap $ <ScriptCmd>GoToEnd()<cr>
 
 inoremap ( ()<left>
+inoremap ) <ScriptCmd>WriteClosingParenthesis()<cr>
 inoremap [ []<left>
+inoremap ] <ScriptCmd>WriteClosingBrackets()<cr>
 inoremap { {}<left>
-inoremap ' ''<left>
-inoremap " ""<left>
+inoremap } <ScriptCmd>WriteClosingBraces()<cr>
+inoremap ' <ScriptCmd>WriteSingleQuotes()<cr>
+inoremap " <ScriptCmd>WriteDoubleQuotes()<cr>
