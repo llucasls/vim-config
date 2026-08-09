@@ -29,67 +29,64 @@ def GoToPattern(pattern: string, count: number, backward = false): void
 enddef
 
 def WriteSingleQuotes(): void
-  const current_position = getpos('.')
-  const [bufnum, lnum, col, off] = current_position
+  const [bufnum, lnum, col, off] = getcharpos('.')
   const text = getline(lnum)
+  const size = text->strcharlen()
 
-  if text[col - 1] != "'" && col > 2 && text->strpart(col - 3, 2) == "''"
-    setline(lnum, $"{text->strpart(0, col - 2)}''''{text->strpart(col - 2)}")
-  elseif text[col - 1] != "'"
-    setline(lnum, $"{text->strpart(0, col - 1)}''{text->strpart(col - 1)}")
+  if text->strcharpart(col - 1, 1, 1) != "'" && col > 2 && text->strcharpart(col - 3, 2, 1) == "''"
+    setline(lnum, $"{text->strcharpart(0, col - 2, 1)}''''{text->strcharpart(col - 2, size - col + 2, 1)}")
+  elseif text->strcharpart(col - 1, 1, 1) != "'"
+    setline(lnum, $"{text->strcharpart(0, col - 1, 1)}''{text->strcharpart(col - 1, size - col + 1, 1)}")
   endif
 
-  setpos('.', [bufnum, lnum, col + 1, off])
+  setcharpos('.', [bufnum, lnum, col + 1, off])
 enddef
 
 def WriteDoubleQuotes(): void
-  const current_position = getpos('.')
-  const [bufnum, lnum, col, off] = current_position
+  const [bufnum, lnum, col, off] = getcharpos('.')
   const text = getline(lnum)
+  const size = text->strcharlen()
 
-  if text[col - 1] != '"' && col > 2 && text->strpart(col - 3, 2) == '""'
-    setline(lnum, $'{text->strpart(0, col - 2)}""""{text->strpart(col - 2)}')
-  elseif text[col - 1] != '"'
-    setline(lnum, $'{text->strpart(0, col - 1)}""{text->strpart(col - 1)}')
+  if text->strcharpart(col - 1, 1, 1) != '"' && col > 2 && text->strcharpart(col - 3, 2, 1) == '""'
+    setline(lnum, $'{text->strcharpart(0, col - 2, 1)}""""{text->strcharpart(col - 2, size - col + 2, 1)}')
+  elseif text->strcharpart(col - 1, 1, 1) != '"'
+    setline(lnum, $'{text->strcharpart(0, col - 1, 1)}""{text->strcharpart(col - 1, size - col + 1, 1)}')
   endif
 
-  setpos('.', [bufnum, lnum, col + 1, off])
+  setcharpos('.', [bufnum, lnum, col + 1, off])
 enddef
 
 def WriteClosingParenthesis(): void
-  const current_position = getpos('.')
-  const [bufnum, lnum, col, off] = current_position
+  const [bufnum, lnum, col, off] = getcharpos('.')
   const text = getline(lnum)
 
-  if text[col - 1] != ')'
-    setline(lnum, $'{text->strpart(0, col - 1)}){text->strpart(col - 1)}')
+  if text->strcharpart(col - 1, 1) != ')'
+    setline(lnum, $'{text->strcharpart(0, col - 1)}){text->strcharpart(col - 1)}')
   endif
 
-  setpos('.', [bufnum, lnum, col + 1, off])
+  setcharpos('.', [bufnum, lnum, col + 1, off])
 enddef
 
 def WriteClosingBrackets(): void
-  const current_position = getpos('.')
-  const [bufnum, lnum, col, off] = current_position
+  const [bufnum, lnum, col, off] = getcharpos('.')
   const text = getline(lnum)
 
-  if text[col - 1] != ']'
-    setline(lnum, $'{text->strpart(0, col - 1)}]{text->strpart(col - 1)}')
+  if text->strcharpart(col - 1, 1) != ']'
+    setline(lnum, $'{text->strcharpart(0, col - 1)}]{text->strcharpart(col - 1)}')
   endif
 
-  setpos('.', [bufnum, lnum, col + 1, off])
+  setcharpos('.', [bufnum, lnum, col + 1, off])
 enddef
 
 def WriteClosingBraces(): void
-  const current_position = getpos('.')
-  const [bufnum, lnum, col, off] = current_position
+  const [bufnum, lnum, col, off] = getcharpos('.')
   const text = getline(lnum)
 
-  if text[col - 1] != '}'
-    setline(lnum, $'{text->strpart(0, col - 1)}}}{text->strpart(col - 1)}')
+  if text->strcharpart(col - 1, 1) != '}'
+    setline(lnum, $'{text->strcharpart(0, col - 1)}}}{text->strcharpart(col - 1)}')
   endif
 
-  setpos('.', [bufnum, lnum, col + 1, off])
+  setcharpos('.', [bufnum, lnum, col + 1, off])
 enddef
 
 nnoremap <F2> :NERDTreeToggle <cr>
