@@ -31,12 +31,16 @@ enddef
 def WriteSingleQuotes(): void
   const [bufnum, lnum, col, off] = getcharpos('.')
   const text = getline(lnum)
-  const size = text->strcharlen()
+  const is_not_quote = text->strcharpart(col - 1, 1, 1) != "'"
 
-  if text->strcharpart(col - 1, 1, 1) != "'" && col > 2 && text->strcharpart(col - 3, 2, 1) == "''"
-    setline(lnum, $"{text->strcharpart(0, col - 2, 1)}''''{text->strcharpart(col - 2, size - col + 2, 1)}")
-  elseif text->strcharpart(col - 1, 1, 1) != "'"
-    setline(lnum, $"{text->strcharpart(0, col - 1, 1)}''{text->strcharpart(col - 1, size - col + 1, 1)}")
+  if is_not_quote && col > 2 && text->strcharpart(col - 3, 2, 1) == "''"
+    const head = text->strcharpart(0, col - 2)
+    const tail = text->strcharpart(col - 2)
+    setline(lnum, $"{head}''''{tail}")
+  elseif is_not_quote
+    const head = text->strcharpart(0, col - 1)
+    const tail = text->strcharpart(col - 1)
+    setline(lnum, $"{head}''{tail}")
   endif
 
   setcharpos('.', [bufnum, lnum, col + 1, off])
@@ -45,12 +49,16 @@ enddef
 def WriteDoubleQuotes(): void
   const [bufnum, lnum, col, off] = getcharpos('.')
   const text = getline(lnum)
-  const size = text->strcharlen()
+  const is_not_quote = text->strcharpart(col - 1, 1, 1) != '"'
 
-  if text->strcharpart(col - 1, 1, 1) != '"' && col > 2 && text->strcharpart(col - 3, 2, 1) == '""'
-    setline(lnum, $'{text->strcharpart(0, col - 2, 1)}""""{text->strcharpart(col - 2, size - col + 2, 1)}')
-  elseif text->strcharpart(col - 1, 1, 1) != '"'
-    setline(lnum, $'{text->strcharpart(0, col - 1, 1)}""{text->strcharpart(col - 1, size - col + 1, 1)}')
+  if is_not_quote && col > 2 && text->strcharpart(col - 3, 2, 1) == '""'
+    const head = text->strcharpart(0, col - 2)
+    const tail = text->strcharpart(col - 2)
+    setline(lnum, $'{head}""""{tail}')
+  elseif is_not_quote
+    const head = text->strcharpart(0, col - 1)
+    const tail = text->strcharpart(col - 1)
+    setline(lnum, $'{head}""{tail}')
   endif
 
   setcharpos('.', [bufnum, lnum, col + 1, off])
@@ -61,7 +69,9 @@ def WriteClosingParenthesis(): void
   const text = getline(lnum)
 
   if text->strcharpart(col - 1, 1) != ')'
-    setline(lnum, $'{text->strcharpart(0, col - 1)}){text->strcharpart(col - 1)}')
+    const head = text->strcharpart(0, col - 1)
+    const tail = text->strcharpart(col - 1)
+    setline(lnum, $'{head}){tail}')
   endif
 
   setcharpos('.', [bufnum, lnum, col + 1, off])
@@ -72,7 +82,9 @@ def WriteClosingBrackets(): void
   const text = getline(lnum)
 
   if text->strcharpart(col - 1, 1) != ']'
-    setline(lnum, $'{text->strcharpart(0, col - 1)}]{text->strcharpart(col - 1)}')
+    const head = text->strcharpart(0, col - 1)
+    const tail = text->strcharpart(col - 1)
+    setline(lnum, $'{head}]{tail}')
   endif
 
   setcharpos('.', [bufnum, lnum, col + 1, off])
@@ -83,7 +95,9 @@ def WriteClosingBraces(): void
   const text = getline(lnum)
 
   if text->strcharpart(col - 1, 1) != '}'
-    setline(lnum, $'{text->strcharpart(0, col - 1)}}}{text->strcharpart(col - 1)}')
+    const head = text->strcharpart(0, col - 1)
+    const tail = text->strcharpart(col - 1)
+    setline(lnum, $'{head}}}{tail}')
   endif
 
   setcharpos('.', [bufnum, lnum, col + 1, off])
